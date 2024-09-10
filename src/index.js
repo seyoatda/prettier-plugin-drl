@@ -1,21 +1,22 @@
-const parser = require('toml/lib/parser')
+import { parse as _parse } from 'toml/lib/parser'
+import prettier from 'prettier'
 const {
   doc: {
     builders: { concat }
   }
-} = require('prettier')
+} = prettier
 
 const languages = [
   {
     extensions: ['.toml'],
-    name: 'TOML',
-    parsers: ['toml-parse']
+    name: 'DRL',
+    parsers: ['drl-parse']
   }
 ]
 
 const parsers = {
   'toml-parse': {
-    parse: text => parser.parse(text),
+    parse: text => _parse(text),
     astFormat: 'toml-ast'
   }
 }
@@ -39,7 +40,7 @@ const printers = {
   }
 }
 
-module.exports = {
+export default {
   languages,
   parsers,
   printers
